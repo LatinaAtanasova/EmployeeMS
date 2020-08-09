@@ -47,5 +47,10 @@ namespace EMS.Services
             }
             return employees;
         }
+
+        public EmployeeDto GetEmployeeById(int? id)
+        {
+            return GetAllEmployees().FirstOrDefault(x => x.Id == id);
+        }
     }
 }

@@ -9,6 +9,8 @@
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 </div>
 
+<div id="dialog" title="Dialog Title"></div>
+
 <table style="width:100%">
     <tr>
         <th>N</th>
@@ -24,7 +26,7 @@
     @{
         foreach (var empl in Model)
         {
-            <tr>
+            <tr class="empl-data" data-id="@empl.Id">
                 <td>@empl.Id</td>
                 <td>@empl.EmployeeName</td>
                 <td>@empl.JobTitle</td>
@@ -34,8 +36,47 @@
                 <td>@empl.HireDate</td>
                 <td>@empl.LineManager</td>
                 <td>@empl.EmployeeAddress</td>
+                <td><a href="@String.Format("/Employee/GetEmployee/?id={0}", @empl.Id)">Open</a></td>
             </tr>
 
         }
     }
 </table>
+
+@*@section Scripts{
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#dialog').dialog({ autoOpen: false });
+
+            $('.empl-data').click(function () {
+                let employeeId = $(this).attr("data-id");
+
+                $.ajax({
+                    url: '/Employee/GetEmployee',
+                    dataType: "html",
+                    type: "GET",
+                    contentType: 'application/json; charset=utf-8',
+                    data: {
+                        'id': employeeId
+                    },
+                    //async: false,
+                    //processData: false,
+                    //cache: false,
+                    //delay: 15,
+                    success: function (data) {
+                        $('#dialog').html(data);
+                        $('#dialog').dialog('open');
+
+                    },
+                    error: function (xhr) {
+                        alert(xhr);
+                    }
+                });
+            })
+        })
+
+    </script>
+}*@

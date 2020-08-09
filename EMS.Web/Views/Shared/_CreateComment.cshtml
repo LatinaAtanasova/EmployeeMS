@@ -1,0 +1,9 @@
+﻿@model EMS.Web.Models.CommentViewModel
+
+<form asp-controller="Comment" asp-action="Add" method="post">
+    <textarea asp-for="Description" name ="Description" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+    <input asp-for="Author" type="text" name="Author" placeholder="Enter your name"/>
+    <input asp-for="EmployeeId" name="EmployeeId" type="hidden" value="@Model.EmployeeId" />
+    <br>
+    <button type="submit" class="btn btn-info pull-right">Post</button>
+</form>

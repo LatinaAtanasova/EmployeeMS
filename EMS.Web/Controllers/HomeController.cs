@@ -32,8 +32,17 @@ namespace EMS.Web.Controllers
             List<EmployeeDto> allEmployees = _employeeService.GetAllEmployees().ToList();
             List<EmployeeViewModel> allEmployeesModels = new List<EmployeeViewModel>();
 
+
             foreach (var employee in allEmployees)
             {
+                EmployeeDto manager = _employeeService.GetEmployeeById(employee.LineManager);
+                string managerName = String.Empty;
+
+                if (manager != null)
+                {
+                    managerName = manager.EmployeeName;
+                }
+
                 EmployeeViewModel model = new EmployeeViewModel
                 {
                     Id = employee.Id,
@@ -42,7 +51,7 @@ namespace EMS.Web.Controllers
                     EmployeeAddress = employee.EmployeeAddress,
                     HireDate = employee.HireDate,
                     JobTitle = employee.JobTitle,
-                    LineManager = employee.LineManager,
+                    LineManager = managerName,
                     Salary = employee.Salary,
                     AnnualSalary = employee.AnnualSalary
                 };

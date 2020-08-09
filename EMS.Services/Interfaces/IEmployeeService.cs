@@ -10,5 +10,6 @@ namespace EMS.Services.Interfaces
     {
         int Add(Employee employee);
         IEnumerable<EmployeeDto> GetAllEmployees();
+        EmployeeDto GetEmployeeById(int? id);
     }
 }
