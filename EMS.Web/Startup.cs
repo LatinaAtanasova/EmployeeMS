@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EMS.Data;
+using EMS.Data.Repository;
+using EMS.Services;
+using EMS.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +33,9 @@ namespace EMS.Web
                     Configuration.GetConnectionString("EmployeeMSConnection")));
 
             services.AddControllersWithViews();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

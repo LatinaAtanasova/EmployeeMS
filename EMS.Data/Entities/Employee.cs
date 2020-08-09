@@ -1,6 +1,7 @@
 ﻿using EMS.Data.Entities.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EMS.Data.Entities
@@ -12,7 +13,7 @@ namespace EMS.Data.Entities
         public string JobTitle { get; set; }
         public string Department { get; set; }
         public decimal Salary { get; set; }
-        public int LineManager { get; set; }
+        public int? LineManager { get; set; }
         public string EmployeeAddress { get; set; }
 
     }

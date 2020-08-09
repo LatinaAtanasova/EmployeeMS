@@ -1,8 +1,41 @@
-﻿@{
+﻿@model List<EMS.Web.Models.EmployeeViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Employees Records</h1>
+    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 </div>
+
+<table style="width:100%">
+    <tr>
+        <th>N</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Department</th>
+        <th>Salary (monthly)</th>
+        <th>Salary (annual)</th>
+        <th>Hire Date</th>
+        <th>Line Manager</th>
+        <th>Employee Address</th>
+    </tr>
+    @{
+        foreach (var empl in Model)
+        {
+            <tr>
+                <td>@empl.Id</td>
+                <td>@empl.EmployeeName</td>
+                <td>@empl.JobTitle</td>
+                <td>@empl.Department</td>
+                <td>@empl.Salary</td>
+                <td>@empl.AnnualSalary</td>
+                <td>@empl.HireDate</td>
+                <td>@empl.LineManager</td>
+                <td>@empl.EmployeeAddress</td>
+            </tr>
+
+        }
+    }
+</table>

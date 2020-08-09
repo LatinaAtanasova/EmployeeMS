@@ -30,13 +30,22 @@ namespace EMS.Data.Repository
 
         public int Insert(T entity)
         {
-            if (entity == null)
+            try
             {
-                throw new ArgumentNullException("entity");
-            }
+                if (entity == null)
+                {
+                    throw new ArgumentNullException("entity");
+                }
 
-            entities.Add(entity);
-            _context.SaveChanges();
+                entities.Add(entity);
+                _context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
             return entity.Id;
         }
 
