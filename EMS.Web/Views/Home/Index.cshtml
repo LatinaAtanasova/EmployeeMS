@@ -7,10 +7,10 @@
 <div class="text-center">
     <h3 class="display-4">Employees</h3>
 </div>
-<div class="row" style="margin-top: 10px">
+<div class="row" style="margin-top: 20px">
     <div class="col-lg-3">
-        <h5>Filter employees by:</h5>
-        <fieldset style="width:50%" class="justify-content-lg-end">
+        <fieldset>
+            <h5>Filter employees by:</h5>
             <div>
                 <label class="test">Department</label>
                 <select class="test" id="department">
@@ -92,10 +92,6 @@
                 }
             });
 
-
-
-
-
             $('.filterBtn').click(function () {
                 let btn = $(this).val();
 
@@ -137,6 +133,12 @@
                     success: function (data) {
                         $('#partial').html(data);
 
+                        $('#name').val('');
+                        $('#department').val('');
+                        $('#title').val('');
+                        $('#montlySalary').val('');
+                        $('#manager').val('');
+                        $('#dateHire').val('');
                     },
                     error: function (xhr) {
                         alert(xhr);
@@ -144,6 +146,8 @@
                 });
 
                 //$('#name').val('');
+
+
 
             })
 

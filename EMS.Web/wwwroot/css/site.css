@@ -73,9 +73,12 @@ tr:hover {
     background-color: #ffffb3;
 }
 
-fieldset{
-    width: 50%;
+fieldset {
+    width: 70%;
     padding-bottom: 20px;
+    padding-left: 70px;
+    border-right: solid 1px;
+    border-color: rgb(206, 212, 218);
 }
 
 label {
@@ -96,4 +99,6 @@ form input {
     border-top: solid 5px;
     border-top-color: rgb(206, 212, 218);
 }
-
+fieldset div{
+    padding-top: 5px;
+}
