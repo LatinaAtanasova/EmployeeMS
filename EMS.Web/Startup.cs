@@ -6,6 +6,7 @@ using EMS.Data;
 using EMS.Data.Repository;
 using EMS.Services;
 using EMS.Services.Interfaces;
+using EMS.Web.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +38,7 @@ namespace EMS.Web
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +56,8 @@ namespace EMS.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSeedDataMiddleware();
 
             app.UseRouting();
 

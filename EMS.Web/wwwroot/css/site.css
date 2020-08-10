@@ -70,6 +70,30 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 tr:hover {
-    background-color: #ffff99;
-    //cursor: pointer;
+    background-color: #ffffb3;
 }
+
+fieldset{
+    width: 50%;
+    padding-bottom: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: left;
+}
+form textarea{
+    margin-bottom: 5px;
+}
+form input {
+    border: solid 1px;
+    border-color: rgb(206, 212, 218);
+    margin-bottom: 5px;
+}
+.page-header {
+    margin-top: 10px;
+    border-top: solid 5px;
+    border-top-color: rgb(206, 212, 218);
+}
+

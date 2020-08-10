@@ -1,9 +1,26 @@
 ﻿@model EMS.Web.Models.CommentViewModel
 
 <form asp-controller="Comment" asp-action="Add" method="post">
-    <textarea asp-for="Description" name ="Description" class="form-control" placeholder="write a comment..." rows="3"></textarea>
-    <input asp-for="Author" type="text" name="Author" placeholder="Enter your name"/>
+    <textarea id="commentDescr" asp-for="Description" name="Description" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+    <input id="author" asp-for="Author" type="text" name="Author" placeholder="Enter your name" />
     <input asp-for="EmployeeId" name="EmployeeId" type="hidden" value="@Model.EmployeeId" />
     <br>
     <button type="submit" class="btn btn-info pull-right">Post</button>
 </form>
+
+<script>
+    $(document).on('click', 'form button[type=submit]', function (e) {
+
+        let descr = $('#commentDescr').val();
+        let author = $('#author').val();
+
+        if (!descr) {
+            alert('Please, fill in your comment!')
+            e.preventDefault(); //prevent the default action
+        }
+        if (!author) {
+            alert('Please, fill in your name!')
+            e.preventDefault(); //prevent the default action
+        }
+    });
+</script>

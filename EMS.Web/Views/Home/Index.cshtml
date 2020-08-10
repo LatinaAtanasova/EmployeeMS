@@ -1,82 +1,162 @@
-﻿@model List<EMS.Web.Models.EmployeeViewModel>
+﻿@model EMS.Web.Models.SearchModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Employees Records</h1>
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <h3 class="display-4">Employees</h3>
+</div>
+<div class="row" style="margin-top: 10px">
+    <div class="col-lg-3">
+        <h5>Filter employees by:</h5>
+        <fieldset style="width:50%" class="justify-content-lg-end">
+            <div>
+                <label class="test">Department</label>
+                <select class="test" id="department">
+                    <option selected value="">Choose department ...</option>
+                    @foreach (var department in Model.Departments)
+                    {
+                        <option value="@department.Description">@department.Description</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="test">Line Manager</label>
+                <select class="test" id="manager">
+                    <option selected value="">Choose Manager ...</option>
+                    @foreach (var manager in Model.Managers)
+                    {
+                        <option value="@manager.EmployeeName">@manager.EmployeeName</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <label>Title</label>
+                <select id="title">
+                    <option selected value="">Choose job title ...</option>
+                    @foreach (var title in Model.Titles)
+                    {
+                        <option value="@title">@title</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label>Name</label>
+                <input type="text" id="name" />
+            </div>
+            <div>
+                <label>Monthly Salary</label>
+                <input type="number" id="montlySalary" />
+            </div>
+            <div>
+                <label>Hire Date</label>
+                <input id="dateHire" />
+            </div>
+            <div style="margin-top:5px">
+                <input class="filterBtn" type="button" value="Search" />
+                <input class="filterBtn" type="button" value="Clear" />
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-lg-9" id="partial"></div>
 </div>
 
-<div id="dialog" title="Dialog Title"></div>
-
-<table style="width:100%">
-    <tr>
-        <th>N</th>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Department</th>
-        <th>Salary (monthly)</th>
-        <th>Salary (annual)</th>
-        <th>Hire Date</th>
-        <th>Line Manager</th>
-        <th>Employee Address</th>
-    </tr>
-    @{
-        foreach (var empl in Model)
-        {
-            <tr class="empl-data" data-id="@empl.Id">
-                <td>@empl.Id</td>
-                <td>@empl.EmployeeName</td>
-                <td>@empl.JobTitle</td>
-                <td>@empl.Department</td>
-                <td>@empl.Salary</td>
-                <td>@empl.AnnualSalary</td>
-                <td>@empl.HireDate</td>
-                <td>@empl.LineManager</td>
-                <td>@empl.EmployeeAddress</td>
-                <td><a href="@String.Format("/Employee/GetEmployee/?id={0}", @empl.Id)">Open</a></td>
-            </tr>
-
-        }
-    }
-</table>
-
-@*@section Scripts{
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@section Scripts{
     <script>
         $(document).ready(function () {
 
-            $('#dialog').dialog({ autoOpen: false });
+            $('#dateHire').datepicker({ dateFormat: 'yy-mm-dd' });
 
-            $('.empl-data').click(function () {
-                let employeeId = $(this).attr("data-id");
+            $.ajax({
+                url: '/Employee/GetEmployees',
+                //dataType: "html",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                data: {
+                    'btn': 'Clear',
+                    'name': ''
+                },
+                //async: false,
+                //processData: false,
+                //cache: false,
+                //delay: 15,
+                success: function (data) {
+                    $('#partial').html(data);
+
+                },
+                error: function (xhr) {
+                    alert(xhr);
+                }
+            });
+
+
+
+
+
+            $('.filterBtn').click(function () {
+                let btn = $(this).val();
+
+                let employeeName = $('#name').val();
+                let departName = $('#department').find(":selected").val();
+                let title = $('#title').find(":selected").val();
+                let monthlySalary = $('#montlySalary').val();
+                let managerName = $('#manager').find(":selected").val();
+                let dateHire = $('#dateHire').val();
+
+                if (dateHire === 'undefined') {
+                    dateHire = null;
+                }
+                else {
+                    let date = new Date(dateHire);
+                    dateHire = formatDate(date);
+                }
+
+                console.log(dateHire);
 
                 $.ajax({
-                    url: '/Employee/GetEmployee',
-                    dataType: "html",
+                    url: '/Employee/GetEmployees',
+                    //dataType: "html",
                     type: "GET",
                     contentType: 'application/json; charset=utf-8',
                     data: {
-                        'id': employeeId
+                        'btn': btn,
+                        'name': employeeName,
+                        'departmentName': departName,
+                        'title': title,
+                        'monthlySalary': monthlySalary,
+                        'managerName': managerName,
+                        'dateHire': dateHire
                     },
                     //async: false,
                     //processData: false,
                     //cache: false,
                     //delay: 15,
                     success: function (data) {
-                        $('#dialog').html(data);
-                        $('#dialog').dialog('open');
+                        $('#partial').html(data);
 
                     },
                     error: function (xhr) {
                         alert(xhr);
                     }
                 });
+
+                //$('#name').val('');
+
             })
+
+            function formatDate(fulldate) {
+                let year = fulldate.getFullYear();
+                let month = parseInt(fulldate.getMonth()) + 1;
+                let day = fulldate.getDate();
+
+                //return `${month}/${day}/${year}`;
+                return `${year}-${month}-${day}`;
+            }
+
         })
 
     </script>
-}*@
+}

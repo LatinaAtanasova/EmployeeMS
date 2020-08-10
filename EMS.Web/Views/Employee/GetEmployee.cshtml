@@ -5,152 +5,153 @@
 }
 
 
-<h5><strong>Information about @Model.EmployeeName at position @Model.JobTitle in @Model.Department department</strong></h5>
-<br>
+<div class="container">
+    <h5><strong>Information about @Model.EmployeeName at position @Model.JobTitle in @Model.Department department</strong></h5>
+    <br>
 
-<div class="container bootstrap snippet">
-    <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-4">
-                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
-                <ul title="Ratings" class="list-inline ratings text-center">
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                </ul>
-            </div>
-            <div class="col-md-6">
+    <div class="container bootstrap snippet">
+        <div class="panel-body inf-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="~/images/employees.png" data-original-title="Usuario">
+                    <ul title="Ratings" class="list-inline ratings text-center">
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
 
-                <div class="table-responsive">
-                    <table class="table table-user-information">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                        Employee Name
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.EmployeeName
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-user  text-primary"></span>
-                                        Employee Address
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.EmployeeAddress
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
-                                        Department
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.Department
-                                </td>
-                            </tr>
+                    <div class="table-responsive">
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                            Employee Name
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.EmployeeName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-user  text-primary"></span>
+                                            Employee Address
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.EmployeeAddress
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                            Department
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.Department
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                        Salary
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.Salary &#8364;
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                            Salary
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.Salary &#8364;
+                                    </td>
+                                </tr>
 
 
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                                        Annual Salary
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.AnnualSalary &#8364;
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
-                                        Hire Date
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @(Model.HireDate)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        Job Title
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.JobTitle
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        Line Manager
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    @Model.LineManager
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                            Annual Salary
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.AnnualSalary &#8364;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                            Hire Date
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.HireDate.Date.ToString("dd/MM/yyyy")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                            Job Title
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.JobTitle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                            Line Manager
+                                        </strong>
+                                    </td>
+                                    <td class="text-primary">
+                                        @Model.LineManager
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-10">
 
-        @await Html.PartialAsync("_CreateComment", new CommentViewModel { EmployeeId = Model.Id })
+            @await Html.PartialAsync("_CreateComment", new CommentViewModel { EmployeeId = Model.Id })
 
-        @{
-            if (Model.Comments.Count > 0)
-            {
-                <div class="page-header">
-                    <h3>@Model.Comments.Count Comments</h3>
-                </div>
-                <div class="comments-list">
+            @{
+                if (Model.Comments.Count > 0)
+                {
+                    <div class="page-header">
+                        <h3>@Model.Comments.Count Comments</h3>
+                    </div>
+                    <div class="comments-list">
 
-                    @{
-                        foreach (var comment in Model.Comments)
-                        {
-                            @await Html.PartialAsync("_EditComment", comment);
+                        @{
+                            foreach (var comment in Model.Comments)
+                            {
+                                @await Html.PartialAsync("_EditComment", comment);
 
+
+                            }
 
                         }
+                    </div>
 
-                    }
-                </div>
-
+                }
             }
-        }
+        </div>
     </div>
+
 </div>
-
-

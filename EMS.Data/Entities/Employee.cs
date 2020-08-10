@@ -11,10 +11,10 @@ namespace EMS.Data.Entities
         public DateTime HireDate { get; set; }
         public string EmployeeName { get; set; }
         public string JobTitle { get; set; }
-        public string Department { get; set; }
+        public int DepartmentId { get; set; }
         public decimal Salary { get; set; }
         public int? LineManager { get; set; }
         public string EmployeeAddress { get; set; }
-
+        public bool isActive { get; set; } = true;
     }
 }

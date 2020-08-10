@@ -1,0 +1,46 @@
+﻿@model List<EMS.Web.Models.EmployeeViewModel>
+
+
+@{
+    if (Model.Count > 0)
+    {
+        <table style="width:100%">
+            <tr>
+                <th>N</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>Salary (monthly)</th>
+                <th>Salary (annual)</th>
+                <th>Hire Date</th>
+                <th>Line Manager</th>
+                <th>Employee Address</th>
+            </tr>
+            @{
+                int counter = 1;
+
+                foreach (var empl in Model)
+                {
+                    DateTime date = empl.HireDate.Date;
+                    <tr class="empl-data" data-id="@empl.Id">
+                        <td>@counter</td>
+                        <td>@empl.EmployeeName</td>
+                        <td>@empl.JobTitle</td>
+                        <td>@empl.Department</td>
+                        <td>@empl.Salary</td>
+                        <td>@empl.AnnualSalary</td>
+                        <td>@date.ToString("dd/MM/yyyy")</td>
+                        <td>@empl.LineManager</td>
+                        <td>@empl.EmployeeAddress</td>
+                        <td><a href="@String.Format("/Employee/GetEmployee/?id={0}", @empl.Id)">Open</a></td>
+                    </tr>
+                    counter++;
+                }
+            }
+        </table>
+    }
+    else
+    {
+        <h5>No employees much your search criteria!</h5>
+    }
+}

@@ -84,5 +84,82 @@ namespace EMS.Web.Controllers
 
             return View(employeeModel);
         }
+
+        public PartialViewResult GetEmployees(string btn, string name, string departmentName, string title, int monthlySalary, string managerName, DateTime? dateHire)
+        {
+            var partial = "_Employees";
+            List<EmployeeDto> allEmployees = _employeeService.GetAllEmployees().ToList();
+            List<EmployeeViewModel> allEmployeesModels = GetEmployeesModel(allEmployees);
+
+            if (btn == "Clear")
+            {
+                return PartialView(partial, allEmployeesModels);
+            }
+            else
+            {
+                var employees = allEmployeesModels;
+
+                if (departmentName != null)
+                {
+                    employees = employees.Where(x => x.Department == departmentName).ToList();
+                }
+                if (name != null)
+                {
+                    employees = employees.Where(x => x.EmployeeName.Contains(name.Trim())).ToList();
+                }
+                if (title != null)
+                {
+                    employees = employees.Where(x => x.JobTitle == title).ToList();
+                }
+                if (monthlySalary > 0)
+                {
+                    decimal ammount = (decimal)monthlySalary;
+                    employees = employees.Where(x => x.Salary == ammount).ToList();
+                }
+                if (managerName != null)
+                {
+                    employees = employees.Where(x => x.LineManager == managerName).ToList();
+                }
+                if (dateHire != null)
+                {
+                    employees = employees.Where(x => x.HireDate == dateHire).ToList();
+                }
+
+                return PartialView(partial, employees);
+            }
+        }
+
+        private List<EmployeeViewModel> GetEmployeesModel(List<EmployeeDto> allEmployees)
+        {
+            List<EmployeeViewModel> allEmployeesModels = new List<EmployeeViewModel>();
+
+            foreach (var employee in allEmployees)
+            {
+                EmployeeDto manager = _employeeService.GetEmployeeById(employee.LineManager);
+                string managerName = String.Empty;
+
+                if (manager != null)
+                {
+                    managerName = manager.EmployeeName;
+                }
+
+                EmployeeViewModel model = new EmployeeViewModel
+                {
+                    Id = employee.Id,
+                    EmployeeName = employee.EmployeeName,
+                    Department = employee.Department,
+                    EmployeeAddress = employee.EmployeeAddress,
+                    HireDate = employee.HireDate,
+                    JobTitle = employee.JobTitle,
+                    LineManager = managerName,
+                    Salary = employee.Salary,
+                    AnnualSalary = employee.AnnualSalary
+                };
+
+                allEmployeesModels.Add(model);
+            }
+
+            return allEmployeesModels;
+        }
     }
 }

@@ -2,10 +2,10 @@
 
 
     <form asp-controller="Comment" asp-action="Edit" method="post">
-        <p><small>@Model.CreateDate</small></p>
+        <p>@Model.CreateDate by <strong>@Model.Author</strong></p>
         <div>
-            <h4 class="media-heading user_name">@Model.Author</h4>
-            <input type="text" asp-for="Description" value="@Model.Description" />
+            @*<h4 class="media-heading user_name">@Model.Author</h4>*@
+            <input class="col-6" type="text" asp-for="Description" value="@Model.Description" />
             <input asp-for="Id" type="hidden" value="@Model.Id" />
 
         </div>
@@ -14,5 +14,6 @@
         <input type="submit" asp-for="Btn" value="Edit" class="btn btn-info pull-right"/>
         <input type="submit" asp-for="Btn" value="Delete" class="btn btn-info pull-right"/>
     </form>
+<br />
 
 

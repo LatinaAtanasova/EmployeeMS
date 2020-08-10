@@ -13,10 +13,12 @@ namespace EMS.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IRepository<Employee> _repository;
+        private readonly IDepartmentService _departmentService;
 
-        public EmployeeService(IRepository<Employee> repository)
+        public EmployeeService(IRepository<Employee> repository, IDepartmentService departmentService)
         {
             _repository = repository;
+            _departmentService = departmentService;
         }
 
         public int Add(Employee employee)
@@ -31,11 +33,12 @@ namespace EMS.Services
 
             foreach (var empl in allEmployees)
             {
+                string department = _departmentService.GetDepartmentName(empl.DepartmentId);
                 EmployeeDto dto = new EmployeeDto
                 {
                     Id = empl.Id,
                     EmployeeName = empl.EmployeeName,
-                    Department = empl.Department,
+                    Department = department,
                     EmployeeAddress = empl.EmployeeAddress,
                     HireDate = empl.HireDate,
                     JobTitle = empl.JobTitle,
@@ -51,6 +54,10 @@ namespace EMS.Services
         public EmployeeDto GetEmployeeById(int? id)
         {
             return GetAllEmployees().FirstOrDefault(x => x.Id == id);
+        }
+        public IEnumerable<Employee> GetManagers()
+        {
+            return _repository.GetAll().Where(x => x.LineManager == null && x.isActive).ToList();
         }
     }
 }
